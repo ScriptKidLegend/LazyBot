@@ -2,12 +2,17 @@ require("dotenv").config();
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const { DisTube } = require("distube");
 const fs = require("fs");
+const db = require("quick.db");
 
 const client = new Client({
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildVoiceStates]
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildVoiceStates
+  ]
 });
 
-// Command collection
+// Load commands
 client.commands = new Collection();
 const commandFiles = fs.readdirSync("./commands").filter(f => f.endsWith(".js"));
 for (const file of commandFiles) {
@@ -15,7 +20,7 @@ for (const file of commandFiles) {
   client.commands.set(command.data.name, command);
 }
 
-// DisTube music
+// DisTube
 client.distube = new DisTube(client, { leaveOnFinish: true, emitNewSongOnly: true });
 
 client.once("ready", () => {
@@ -26,8 +31,13 @@ client.on("interactionCreate", async interaction => {
   if (!interaction.isCommand()) return;
   const command = client.commands.get(interaction.commandName);
   if (!command) return;
+
+  // Tambahkan XP per chat
+  let userXP = db.get(`xp_${interaction.user.id}`) || 0;
+  db.set(`xp_${interaction.user.id}`, userXP + 10);
+
   try {
-    await command.execute(interaction, client);
+    await command.execute(interaction, client, db);
   } catch (err) {
     console.error(err);
     await interaction.reply({ content: "❌ Terjadi error!", ephemeral: true });
