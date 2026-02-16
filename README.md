@@ -1,0 +1,2 @@
+# LazyBot
+Lazy, useless, slow
