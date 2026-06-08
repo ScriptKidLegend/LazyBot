@@ -1,6 +1,6 @@
 # LazyBot
 
-A bot made because I was bored.
+A bot made because....
 
 ## Features
 
