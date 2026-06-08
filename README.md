@@ -1,28 +1,24 @@
 # LazyBot
 
-> A fun bot project built for experiments, automation, and questionable decisions.
-
-## About
-
-LazyBot is a personal project where I experiment with bot development, automation, and random ideas.
+A bot made because I was bored.
 
 ## Features
 
-- Bot commands
-- Fast and lightweight
-- Experimental features
--  Probably contains bugs
+- Sometimes works
+- Sometimes doesn't
+- Nobody knows why
 
-## Status
+## Installation
 
-Work in progress👍
+```bash
+git clone your-repo
+```
 
-## Goals
+## Known Issues
 
-- Learn programming
-- Build cool features
-- Have fun
+Yes.
 
-## Author
+## License
 
-Thank you
+Trust me bro.
+```
