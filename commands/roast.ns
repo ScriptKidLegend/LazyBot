@@ -1,0 +1,18 @@
+const { SlashCommandBuilder } = require("discord.js");
+const roasts = [
+  "Kamu yang tinggalnya dikolong jembatan ya",
+  "Woi hitam",
+  "Kamu mirip, mirip sampah"
+];
+
+module.exports = {
+  data: new SlashCommandBuilder()
+    .setName("roast")
+    .setDescription("ngeroasting siapapun")
+    .addUserOption(opt => opt.setName("user").setDescription("Target roast").setRequired(true)),
+  async execute(interaction) {
+    const target = interaction.options.getUser("user");
+    const roast = roasts[Math.floor(Math.random() * roasts.length)];
+    await interaction.reply(`${target}, ${roast}`);
+  }
+};
